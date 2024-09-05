@@ -16,46 +16,70 @@ namespace TBinaryTree
             // ---------------------------------
             // THIS CODE YOU HAVE TO ACTIVE 
             // ---------------------------------
+            Console.WriteLine("\n\n\n_______________CREATE TREE_______________\n\n\n");
             BinarySearchTree binarySearchTree = BuildBinarySearchTree();
-            Console.WriteLine("Created tree and printed without order");
             Console.WriteLine();
             Console.WriteLine();
 
 
+
+            await Task.Delay(4000);
+
+            // Print the tree as unbalance 
+            Console.WriteLine("\n\n\n_______________PRINT TREE UNBALANCED_______________\n\n\n");
+            binarySearchTree.PrintTree(binarySearchTree.Root);
+
+
+            await Task.Delay(4000);
             // This code balanced the tree
             // and print the tree as in-order & pre-order
             //
-            //binarySearchTree.BalanceTree();
-            //binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
-            //Console.WriteLine();
-            //Console.WriteLine();
-            //binarySearchTree.PrintTree(binarySearchTree.Root, "pre-order");
+            Console.WriteLine("\n\n\n_______________BALANCED THE TREE_______________\n\n\n");
+            binarySearchTree.BalanceTree();
+            binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
 
 
+
+            // Print the tree as balanced
+            Console.WriteLine("\n\n\n_______________PRINT TREE BALANCED_______________\n\n\n");
+            await Task.Delay(4000);
+            List<DNode> allNode = binarySearchTree.InOrderRecursiveS(binarySearchTree.Root);
+            for(int i = 0; i < allNode.Count; i++)
+            {
+                Console.Write($"Node number:{i} ");
+                Console.WriteLine($"node details: MIN: {allNode[i].Minseverity}, MAX: {allNode[i].Maxseverity}");
+                Console.WriteLine();
+            }
+
+
+            await Task.Delay(4000);
             // This code balanced the tree and print it base on "in-order" 
             // you can change this to "pre-order" and it's will print like this
             //
-            //OrderAndInsertToJSON(binarySearchTree);
-            //binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
-            //Console.WriteLine();
-            //Console.WriteLine();
+            Console.WriteLine("\n\n\n_______________SAVE THE TREE TO JSON_______________\n\n\n");
+            OrderAndInsertToJSON(binarySearchTree);
+            binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
+            Console.WriteLine();
+            Console.WriteLine();
 
 
+
+            await Task.Delay(4000);
             // This code get the all threats from the JSON
             // and print to the console with delay of 2 seconds
             //
-            //await GetAllThreats(binarySearchTree);
+            Console.WriteLine("\n\n\n_______________GET ALL THREATS_______________\n\n\n");
+            await GetAllThreats(binarySearchTree);
 
         }
 
-
-       
 
         // Order the tree & insert into JSON file
         public static void OrderAndInsertToJSON(BinarySearchTree binarySearchTree)
         {
             binarySearchTree.WriteTreeToJson(binarySearchTree.Root, "defenceStrategiesBalanced");
         }
+
 
         // Building the binray tree 
         public static BinarySearchTree BuildBinarySearchTree()
@@ -72,6 +96,7 @@ namespace TBinaryTree
             
             return binarySearchTree;
         }
+
 
         // Get all threats & print the defence base on search in the binary trees
         public static async Task GetAllThreats(BinarySearchTree binarySearchTree)
@@ -92,7 +117,7 @@ namespace TBinaryTree
                     Console.WriteLine($"Best Match for severity {threatSeverity}: Minseverity: {bestNode.Minseverity}, Maxseverity: {bestNode.Maxseverity}");
                     Console.WriteLine($"Protections: {string.Join(", ", bestNode.Protections)}");
                 }
-
+                Console.WriteLine();
                 await Task.Delay(2000);
             }
         }

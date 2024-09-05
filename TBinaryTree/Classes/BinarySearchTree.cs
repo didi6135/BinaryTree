@@ -136,11 +136,27 @@ namespace TBinaryTree.Classes
 
         }
 
+        public List<DNode> FlattenTreePreOrder(DNode root)
+        {
+            List<DNode> dNodes = new List<DNode>();
+            FlattenTreePreOrderRecursive(root, dNodes);
+            return dNodes;
+        }
 
-        // Return the balanced tree 
+        public void FlattenTreePreOrderRecursive(DNode node, List<DNode> nodes)
+        {
+            if (node == null) return;
+
+            nodes.Add(node);
+
+            FlattenTreePreOrderRecursive(node.leftDefence, nodes);
+            FlattenTreePreOrderRecursive(node.rightDefence, nodes);
+        }
+
+        
         public ProtectionList ConvertTreeToProtectionList(DNode root)
         {
-            List<DNode> nodes = FlattTheTree(root);
+            List<DNode> nodes = FlattenTreePreOrder(root);  
             List<Protection> protections = nodes.Select(node => new Protection
             {
                 MinSeverity = node.Minseverity,
@@ -151,17 +167,41 @@ namespace TBinaryTree.Classes
             return new ProtectionList { AllProtections = protections };
         }
 
-        // Written to json
+        
         public void WriteTreeToJson(DNode root, string filePath)
         {
-            ProtectionList protectionList = ConvertTreeToProtectionList(root);
+            ProtectionList protectionList = ConvertTreeToProtectionList(root);  
 
             var options = new JsonSerializerOptions { WriteIndented = true };
             string jsonString = JsonSerializer.Serialize(protectionList, options);
 
             File.WriteAllText(filePath, jsonString);
-            Console.WriteLine("Balanced tree has been written to the JSON file.");
+            Console.WriteLine("Tree has been written to the JSON file in pre-order.");
         }
+        //public ProtectionList ConvertTreeToProtectionList(DNode root)
+        //{
+        //    List<DNode> nodes = FlattTheTree(root);
+        //    List<Protection> protections = nodes.Select(node => new Protection
+        //    {
+        //        MinSeverity = node.Minseverity,
+        //        MaxSeverity = node.Maxseverity,
+        //        Defenses = node.Protections
+        //    }).ToList();
+
+        //    return new ProtectionList { AllProtections = protections };
+        //}
+
+        //// Written to json
+        //public void WriteTreeToJson(DNode root, string filePath)
+        //{
+        //    ProtectionList protectionList = ConvertTreeToProtectionList(root);
+
+        //    var options = new JsonSerializerOptions { WriteIndented = true };
+        //    string jsonString = JsonSerializer.Serialize(protectionList, options);
+
+        //    File.WriteAllText(filePath, jsonString);
+        //    Console.WriteLine("Balanced tree has been written to the JSON file.");
+        //}
 
         // print the all protection base on what you choose
         // ( The optins is "pre-order" or "in-order", the initial is "pre-order")
@@ -247,6 +287,7 @@ namespace TBinaryTree.Classes
             values.AddRange(InOrderRecursiveS(root.leftDefence)); 
             values.Add(root);                                    
             values.AddRange(InOrderRecursiveS(root.rightDefence)); 
+
             return values;
         }
 
