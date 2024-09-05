@@ -10,6 +10,8 @@ namespace TBinaryTree.Services
     internal static class SeverityServices
     {
 
+
+        // Function that calc the severity 
         public static int CalculateSeverity(Threat threat)
         {
             int targetValue = threat.Target switch
