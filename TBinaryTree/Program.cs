@@ -41,8 +41,8 @@ namespace TBinaryTree
 
 
             // Print the tree as balanced
-            Console.WriteLine("\n\n\n_______________PRINT TREE BALANCED_______________\n\n\n");
             await Task.Delay(4000);
+            Console.WriteLine("\n\n\n_______________PRINT TREE BALANCED_______________\n\n\n");
             List<DNode> allNode = binarySearchTree.InOrderRecursiveS(binarySearchTree.Root);
             for(int i = 0; i < allNode.Count; i++)
             {

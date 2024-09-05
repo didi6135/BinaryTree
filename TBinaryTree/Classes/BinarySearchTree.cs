@@ -136,6 +136,8 @@ namespace TBinaryTree.Classes
 
         }
 
+
+        // All function to save the all protection into a JSON
         public List<DNode> FlattenTreePreOrder(DNode root)
         {
             List<DNode> dNodes = new List<DNode>();
@@ -148,7 +150,6 @@ namespace TBinaryTree.Classes
             if (node == null) return;
 
             nodes.Add(node);
-
             FlattenTreePreOrderRecursive(node.leftDefence, nodes);
             FlattenTreePreOrderRecursive(node.rightDefence, nodes);
         }
@@ -178,33 +179,9 @@ namespace TBinaryTree.Classes
             File.WriteAllText(filePath, jsonString);
             Console.WriteLine("Tree has been written to the JSON file in pre-order.");
         }
-        //public ProtectionList ConvertTreeToProtectionList(DNode root)
-        //{
-        //    List<DNode> nodes = FlattTheTree(root);
-        //    List<Protection> protections = nodes.Select(node => new Protection
-        //    {
-        //        MinSeverity = node.Minseverity,
-        //        MaxSeverity = node.Maxseverity,
-        //        Defenses = node.Protections
-        //    }).ToList();
-
-        //    return new ProtectionList { AllProtections = protections };
-        //}
-
-        //// Written to json
-        //public void WriteTreeToJson(DNode root, string filePath)
-        //{
-        //    ProtectionList protectionList = ConvertTreeToProtectionList(root);
-
-        //    var options = new JsonSerializerOptions { WriteIndented = true };
-        //    string jsonString = JsonSerializer.Serialize(protectionList, options);
-
-        //    File.WriteAllText(filePath, jsonString);
-        //    Console.WriteLine("Balanced tree has been written to the JSON file.");
-        //}
-
+        
         // print the all protection base on what you choose
-        // ( The optins is "pre-order" or "in-order", the initial is "pre-order")
+        // (The optins is "pre-order" or "in-order", the initial is "pre-order")
         public void PrintTree(DNode node, string traversalType = "pre-order")
         {
             if (node == null)
@@ -212,7 +189,6 @@ namespace TBinaryTree.Classes
                 Console.WriteLine("The tree is empty.");
                 return;
             }
-        
             if (traversalType.ToLower() == "pre-order")
             {
                 Console.WriteLine("Printing tree in pre-order:");
@@ -357,7 +333,6 @@ namespace TBinaryTree.Classes
                 root.Maxseverity = successor.Maxseverity;
                 root.Protections = successor.Protections;
 
-                // Delete the in-order successor
                 root.rightDefence = DeleteNode(root.rightDefence, successor.Minseverity);
             }
 
