@@ -25,26 +25,26 @@ namespace TBinaryTree
             // This code balanced the tree
             // and print the tree as in-order & pre-order
             //
-            binarySearchTree.BalanceTree();
-            binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
-            Console.WriteLine();
-            Console.WriteLine();
-            binarySearchTree.PrintTree(binarySearchTree.Root, "pre-order");
+            //binarySearchTree.BalanceTree();
+            //binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //binarySearchTree.PrintTree(binarySearchTree.Root, "pre-order");
 
 
             // This code balanced the tree and print it base on "in-order" 
             // you can change this to "pre-order" and it's will print like this
             //
-            OrderAndInsertToJSON(binarySearchTree);
-            binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
-            Console.WriteLine();
-            Console.WriteLine();
+            //OrderAndInsertToJSON(binarySearchTree);
+            //binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
+            //Console.WriteLine();
+            //Console.WriteLine();
 
 
             // This code get the all threats from the JSON
             // and print to the console with delay of 2 seconds
             //
-            await GetAllThreats(binarySearchTree);
+            //await GetAllThreats(binarySearchTree);
 
         }
 
@@ -68,7 +68,7 @@ namespace TBinaryTree
             {
                 binarySearchTree.Insert(protection);
             }
-            binarySearchTree.PrintTree(binarySearchTree.Root, "in-order");
+            binarySearchTree.PrintTree(binarySearchTree.Root, "pre-order");
             
             return binarySearchTree;
         }
@@ -81,7 +81,6 @@ namespace TBinaryTree
             foreach (var threat in allThreats.AllThreats)
             {
                 int threatSeverity = SeverityServices.CalculateSeverity(threat);
-                Console.WriteLine(threatSeverity);
                 DNode bestNode = binarySearchTree.SearchBestThreat(threatSeverity);
 
                 if (bestNode == null)
