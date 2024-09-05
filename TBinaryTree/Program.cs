@@ -97,5 +97,57 @@ namespace TBinaryTree
                 await Task.Delay(2000);
             }
         }
+
+
+        // Delete function
+        public DNode DeleteNode(DNode root, int severity)
+        {
+            if (root == null) return root;
+
+            if (severity < root.Minseverity)
+            {
+                root.leftDefence = DeleteNode(root.leftDefence, severity);
+            }
+            else if (severity > root.Minseverity)
+            {
+                root.rightDefence = DeleteNode(root.rightDefence, severity);
+            }
+            else
+            {
+                if (root.leftDefence == null && root.rightDefence == null)
+                {
+                    return null;
+                }
+                else if (root.leftDefence == null)
+                {
+                    return root.rightDefence;
+                }
+                else if (root.rightDefence == null)
+                {
+                    return root.leftDefence;
+                }
+
+                DNode successor = FindMin(root.rightDefence);
+
+                root.Minseverity = successor.Minseverity;
+                root.Maxseverity = successor.Maxseverity;
+                root.Protections = successor.Protections;
+
+                // Delete the in-order successor
+                root.rightDefence = DeleteNode(root.rightDefence, successor.Minseverity);
+            }
+
+            return root;
+        }
+
+        // Find the minimum value node in the tree (leftmost node)
+        public DNode FindMin(DNode node)
+        {
+            while (node.leftDefence != null)
+            {
+                node = node.leftDefence;
+            }
+            return node;
+        }
     }
 }
